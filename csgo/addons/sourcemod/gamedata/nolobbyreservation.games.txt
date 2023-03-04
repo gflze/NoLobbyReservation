@@ -7,8 +7,8 @@
 			"CBaseServer::IsExclusiveToLobbyConnections_Patch"
 			{
 				/* 
-					原始汇编代码 84 C0 test al, al
-					更改后为 30 C0 xor al, al
+					Original assembly code 84 C0 test al, al
+					Changed to 30 C0 xor al, al
 				*/
 				"windows" "30 C0"
 				"linux" "30 C0"
@@ -80,8 +80,8 @@
 			"CBaseServer::ReplyChallenge_Patch1"
 			{
 				/*
-					存在字符串 connect-retry
-					汇编代码 test al, al
+					Presence string connect-retry
+					Assembly code test al, al
 				*/
 				"windows" "994"
 			}
@@ -89,8 +89,8 @@
 			"CBaseServer::ReplyChallenge_Patch2"
 			{
 				/*
-					存在字符串 public
-					汇编代码 test al, al
+					Presence string public
+					Assembly code test al, al
 				*/
 				"windows" "1507"
 			}
@@ -145,8 +145,8 @@
 
 		"Signatures"
 		{
-			/*	目标函数在此字符串上方
-			   	"Server only accepting connections from game lobby %s %d.\n"
+			/*	The target function is above this string
+				"Server only accepting connections from game lobby %s %d.\n"
 			*/
 			"CBaseServer::IsExclusiveToLobbyConnections"
 			{
@@ -154,7 +154,7 @@
 				"windows" "\x8B\x01\x8B\x40\x5C\xFF\xD0\x84\xC0\x75\x2A\xC3"
 				"linux" "\x55\x89\xE5\x83\xEC\x08\x8B\x45\x08\x8B\x10\x8B\x52\x60\x81\xFA\x2A\x2A\x2A\x2A\x75\x2A\x0F\xB6\x80\x88\x02\x00\x00"
 			}
-			/*	目标函数存在字符串
+			/*	The target function exists as a string
 				"Server running with server_is_unavailable, ignoring challenge from %s\n"
 			 */
 			"CBaseServer::ReplyChallenge"
