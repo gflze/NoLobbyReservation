@@ -109,6 +109,8 @@ mem_patch g_replyChallengePatch2;
 mem_patch g_replyChallengePatch3;
 mem_patch g_replyChallengePatch4;
 
+int g_bFirstConnected = false;
+
 public void OnPluginStart()
 {
 	GameData conf = new GameData("nolobbyreservation.games");
@@ -154,4 +156,18 @@ public void OnPluginEnd()
 	g_replyChallengePatch2.Restore();
 	g_replyChallengePatch3.Restore();
 	g_replyChallengePatch4.Restore();
+}
+
+public void OnClientConnected()
+{
+	// https://github.com/perilouswithadollarsign/cstrike15_src/blob/master/engine/baseserver.cpp#L1875-L1883
+	// Does not run anymore when these patches are loaded, so we mimic the expected behaviour
+	if (!g_bFirstConnected)
+	{
+		char map[PLATFORM_MAX_PATH];
+		GetCurrentMap(map, sizeof(map));
+
+		ForceChangeLevel(map, "NoLobbyReservation mimicking blocked CS:GO behaviour");
+		g_bFirstConnected = true;
+	}
 }
